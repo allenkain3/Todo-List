@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo Management</title>
+	 <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+	<div class=container>
+		<h3 align="center">To Do List</h3>
+		<hr>
+		
+		<!-- Adding a button for save a new  task -->
+		<a th:href="@{/todos/showFormForAdd}" class="btn btn-info btn-sm mb-3">
+		Add Task
+		</a>
+			
+		
+		<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Start Date</th>
+				<th>Task</th>
+				<th>Due Date</th>
+				<th>Status</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="tempTodo: ${todos}">
+				<td th:text="${#dates.format(tempTodo.startDate, 'MM/dd/yyyy')}"/>
+				<td th:text="${tempTodo.Task}"/>
+				<td th:text="${#dates.format(tempTodo.dueDate, 'MM/dd/yyyy')}"/>
+				<td th:text="${tempTodo.Status}"/>
+			<!-- Add new BUtton -->
+			<td>
+				<a th:href="@{/todos/showFormForUpdate(todoId=${tempTodo.id})}"
+				class="btn btn-info btn-sm">Update</a>
+				
+				<a th:href="@{/todos/delete(todoId=${tempTodo.id})}"
+				class="btn btn-info btn-sm">Delete</a>
+			</td>
+			</tr>
+			
+		</tbody>
+		
+		</table>
+
+	</div>
+
+</body>
+
+</html>
